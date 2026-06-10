@@ -9,7 +9,7 @@ font-family: Poppins, sans-serif;
 }
 
 header{
-background-color: #53d2f8;
+background-color: #070707;
 color: rgb(255, 255, 255);
 padding: 20px;
 }
@@ -69,13 +69,13 @@ margin: auto;
 text-align: center;
 font-size: 25px;
 line-height: 1.8;
-color: #333;
+color: #ffffff00;
 padding: 0 20px;
 margin-top: 10px;
 }
 
 .estudante{
-background-color: #88ff00;
+background-color: #d42a00;
 padding: 40px 20px;
 }
 
@@ -110,7 +110,7 @@ margin: 5px;
 }
 
 .escola{
-background: linear-gradient(#40A2E3,#7FC2EF);
+background: linear-gradient(#080808,#000000);
 color: white;
 text-align: center;
 padding: 30px;
