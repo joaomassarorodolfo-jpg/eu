@@ -45,15 +45,14 @@ header{
 }
 
 .escola-image {
-    width: 20%;
-    max-width: 1200px;
+    width: 40%;
+    max-width: 40px;
 }
 
 .txtbanner {
     margin-top: 20px;
     font-size: 40px;
     text-align: center;
-    margin-top: -50px;
 }
 
 .titulo-sobre{
