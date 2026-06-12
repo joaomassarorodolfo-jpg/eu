@@ -45,22 +45,33 @@ header{
 }
 
 .escola-image {
-    width: 100%;
-    max-width: 100%;
-    display: block;
+    width: 40%;
+    max-width: 40px;
 }
 
-.titulo-sobre {
-    margin-top: 30px;
+.txtbanner {
+    margin-top: 20px;
     font-size: 40px;
     text-align: center;
+    margin-top: 100px;
 }
 
-.sobre-mim {
-    max-width: 800px;
+.titulo-sobre{
+    font-size: 45px;
+    margin-top: -200px;
+    margin-bottom: 20px;
     text-align: center;
-    font-size: 28px;
-    line-height: 1.6;
+}
+
+.sobre-mim{
+    max-width: 1000px;
+    margin: auto;
+    text-align: center;
+    font-size: 25px;
+    line-height: 1.8;
+    color: #333;
+    padding: 0 20px;
+    margin-top: 10px;
 }
 
 .estudante{
