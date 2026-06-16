@@ -46,20 +46,23 @@ header{
 }
 
 .escola-image {
-    width: 40%;
-    max-width: 40px;
+    width: 60%;
+    display: flex;
+    max-width: 100%;
 }
 
 .txtbanner {
     margin-top: 20px;
+    display: flex;
     font-size: 40px;
     text-align: center;
-    margin-top: -200px;
+    margin-top: 50px;
 }
 
 .titulo-sobre{
+    display: flex;  
     font-size: 45px;
-    margin-top: -200px;
+    margin-top: 30px;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -76,7 +79,7 @@ header{
 }
 
 .estudante{
-    background-color: #88ff00;
+    background-color: #1900ff;
     padding: 40px 20px;
 }
 
@@ -111,7 +114,7 @@ header{
 }
 
 .escola{
-    background: linear-gradient(#40A2E3,#7FC2EF);
+    background: linear-gradient(#ffffff,#001aff);
     color: white;
     text-align: center;
     padding: 30px;
