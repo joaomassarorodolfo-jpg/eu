@@ -114,8 +114,8 @@ header{
 }
 
 .escola{
-    background: linear-gradient(#ffffff,#001aff);
-    color: white;
+    background: linear-gradient(#0e0d0d,#001aff);
+    color: rgb(11, 11, 11);
     text-align: center;
     padding: 30px;
 }
