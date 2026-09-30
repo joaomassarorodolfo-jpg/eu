@@ -1,1 +1,8 @@
+{
+  "name": "jogo-adivinhacao-terminal",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Um jogo de adivinhação simples no terminal",
+  "main": "script.js"
+}
 
