@@ -1,67 +1,74 @@
 
-// ========================================
+// ==========================================
 // SITE JOÃO VITOR MASSARO
 // JavaScript principal
-// ========================================
+// ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ====================================
-    // MENU RESPONSIVO
-    // ====================================
+    // ======================================
+    // MENU DE NAVEGAÇÃO
+    // ======================================
 
-    const menuToggle = document.getElementById("menu-toggle");
-    const menu = document.getElementById("menu");
+    const botaoMenu = document.getElementById("botao-menu");
+    const menuLinks = document.getElementById("menu-links");
 
-    if (menuToggle && menu) {
-        menuToggle.addEventListener("click", () => {
-            const aberto = menu.classList.toggle("ativo");
+    function fecharMenu() {
+        menuLinks.classList.remove("ativo");
+        botaoMenu.setAttribute("aria-expanded", "false");
+    }
 
-            menuToggle.setAttribute("aria-expanded", String(aberto));
-            menuToggle.setAttribute(
-                "aria-label",
-                aberto ? "Fechar menu" : "Abrir menu"
-            );
+    if (botaoMenu && menuLinks) {
 
-            menuToggle.textContent = aberto ? "✕" : "☰";
+        botaoMenu.addEventListener("click", () => {
+            const aberto = menuLinks.classList.toggle("ativo");
+            botaoMenu.setAttribute("aria-expanded", String(aberto));
         });
 
-        const links = menu.querySelectorAll("a");
+        menuLinks.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", fecharMenu);
+        });
 
-        links.forEach((link) => {
-            link.addEventListener("click", () => {
-                menu.classList.remove("ativo");
-                menuToggle.setAttribute("aria-expanded", "false");
-                menuToggle.setAttribute("aria-label", "Abrir menu");
-                menuToggle.textContent = "☰";
-            });
+        document.addEventListener("click", (evento) => {
+            if (
+                !botaoMenu.contains(evento.target) &&
+                !menuLinks.contains(evento.target)
+            ) {
+                fecharMenu();
+            }
+        });
+
+        document.addEventListener("keydown", (evento) => {
+            if (evento.key === "Escape") {
+                fecharMenu();
+            }
         });
     }
 
-    // ====================================
-    // ANO AUTOMÁTICO DO RODAPÉ
-    // ====================================
+    // ======================================
+    // ANO AUTOMÁTICO
+    // ======================================
 
-    const ano = document.getElementById("ano");
+    const anoAtual = document.getElementById("ano-atual");
 
-    if (ano) {
-        ano.textContent = new Date().getFullYear();
+    if (anoAtual) {
+        anoAtual.textContent = new Date().getFullYear();
     }
 
-    // ====================================
+    // ======================================
     // JOGO DE ADIVINHAÇÃO
-    // ====================================
+    // ======================================
 
     const formulario = document.getElementById("form-jogo");
-    const input = document.getElementById("palpite");
+    const inputPalpite = document.getElementById("palpite");
     const resultado = document.getElementById("resultado");
     const contador = document.getElementById("tentativas");
-    const botaoEnviar = document.getElementById("enviar");
-    const botaoReiniciar = document.getElementById("reiniciar");
+    const botaoEnviar = document.getElementById("enviar-palpite");
+    const botaoReiniciar = document.getElementById("reiniciar-jogo");
 
     if (
         !formulario ||
-        !input ||
+        !inputPalpite ||
         !resultado ||
         !contador ||
         !botaoEnviar ||
@@ -74,36 +81,33 @@ document.addEventListener("DOMContentLoaded", () => {
     let tentativas;
     let jogoFinalizado;
 
-    // GERA UM NÚMERO ALEATÓRIO
-    function gerarNumero() {
+    // GERA NÚMERO ALEATÓRIO
+    function gerarNumeroSecreto() {
         return Math.floor(Math.random() * 100) + 1;
     }
 
-    // EXIBE AS MENSAGENS DO JOGO
+    // EXIBE MENSAGENS
     function mostrarMensagem(mensagem, tipo = "") {
         resultado.textContent = mensagem;
-        resultado.className = "resultado";
+        resultado.className = "mensagem";
 
         if (tipo) {
             resultado.classList.add(tipo);
         }
     }
 
-    // INICIA OU REINICIA O JOGO
+    // INICIA O JOGO
     function iniciarJogo() {
-        numeroSecreto = gerarNumero();
+        numeroSecreto = gerarNumeroSecreto();
         tentativas = 0;
         jogoFinalizado = false;
 
-        contador.textContent = tentativas;
-
-        input.value = "";
-        input.disabled = false;
+        contador.textContent = "0";
+        inputPalpite.value = "";
+        inputPalpite.disabled = false;
         botaoEnviar.disabled = false;
 
         mostrarMensagem("Boa sorte! Faça seu primeiro palpite.");
-
-        input.focus();
     }
 
     // VERIFICA O PALPITE
@@ -114,10 +118,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const valor = input.value.trim();
+        const valor = inputPalpite.value.trim();
         const palpite = Number(valor);
 
-        // VALIDAÇÃO
         if (
             valor === "" ||
             !Number.isInteger(palpite) ||
@@ -131,25 +134,21 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // CONTADOR DE TENTATIVAS
         tentativas++;
-        contador.textContent = tentativas;
+        contador.textContent = String(tentativas);
 
-        // NÚMERO MENOR
         if (palpite < numeroSecreto) {
             mostrarMensagem(
                 "📈 Muito baixo! Tente um número maior."
             );
         }
 
-        // NÚMERO MAIOR
         else if (palpite > numeroSecreto) {
             mostrarMensagem(
                 "📉 Muito alto! Tente um número menor."
             );
         }
 
-        // ACERTOU
         else {
             mostrarMensagem(
                 `🏆 PARABÉNS! Você acertou o número ${numeroSecreto} em ${tentativas} tentativa(s)!`,
@@ -157,22 +156,21 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             jogoFinalizado = true;
-            input.disabled = true;
+            inputPalpite.disabled = true;
             botaoEnviar.disabled = true;
         }
 
-        // LIMPA O CAMPO
         if (!jogoFinalizado) {
-            input.value = "";
-            input.focus();
+            inputPalpite.value = "";
+            inputPalpite.focus();
         }
     }
 
-    // EVENTOS DO JOGO
+    // EVENTOS
     formulario.addEventListener("submit", verificarPalpite);
     botaoReiniciar.addEventListener("click", iniciarJogo);
 
-    // INICIALIZA
+    // INICIALIZA O JOGO
     iniciarJogo();
 
 });
